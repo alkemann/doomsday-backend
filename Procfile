@@ -1,1 +1,1 @@
-web: gunicorn doomsday-api:app
+web: gunicorn wsgi:app
