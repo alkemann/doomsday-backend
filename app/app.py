@@ -3,9 +3,9 @@ from app.highscores import get_all_scores, get_score_by_id, save_score
 import os
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
-app.config.from_object(os.environ["FLASK_ENV"])
+env_config = os.getenv("FLASK_ENV", "config.DevelopmentConfig")
+app.config.from_object(env_config)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
