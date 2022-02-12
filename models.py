@@ -17,3 +17,11 @@ class Score(db.Model):
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
+    def json(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "time": self.time,
+            "points": self.points,
+        }
+
