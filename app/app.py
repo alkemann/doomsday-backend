@@ -5,14 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config.from_object(os.environ["APP_SETTINGS"])
+app.config.from_object(os.environ["FLASK_ENV"])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
 @app.route('/', methods=['GET'])
 def index():
-    return "<h1>API -> </h1>"
+    return "<h1>API that'a way </h1>"
 
 
 @app.route('/api/v1/scores', methods=['GET'])
