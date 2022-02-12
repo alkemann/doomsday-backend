@@ -12,7 +12,7 @@ db = SQLAlchemy(app)
 
 @app.route('/', methods=['GET'])
 def index():
-    return "<h1>API that'a way </h1>"
+    return f"<h1>API that'a way {app.config.get('SECRET')}</h1>"
 
 
 @app.route('/api/v1/scores', methods=['GET'])
