@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from app.highscores import get_all_scores, get_score_by_id, save_score
+from highscores import get_all_scores, get_score_by_id, save_score
 import os
 from flask_sqlalchemy import SQLAlchemy
 
@@ -8,6 +8,9 @@ env_config = os.getenv("FLASK_ENV", "config.DevelopmentConfig")
 app.config.from_object(env_config)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+
+from models import Score
 
 
 @app.route('/', methods=['GET'])
