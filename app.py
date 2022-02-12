@@ -18,12 +18,11 @@ def route_home():
 
 @app.route('/api/v1/scores', methods=['GET'])
 def route_scores_index():
-    return jsonify([])
-
-
-# @app.route('/api/v1/scores/<string:listname>', methods=['GET'])
-# def route_score_single_list(listname):
-#     return jsonify(get_all_scores())
+    all_scores = Score.query\
+        .order_by(Score.points.desc())\
+        .limit(3)\
+        .all()
+    return jsonify([s.json() for s in all_scores])
 
 
 @app.route('/api/v1/scores', methods=['PUT', 'POST'])
@@ -31,7 +30,7 @@ def route_add_score():
     post = request.get_json()
     try:
         score = Score(
-            points=post["score"],
+            points=post["points"],
             time=post["time"],
             name=post["name"]
         )
@@ -44,10 +43,10 @@ def route_add_score():
 
 @app.route('/api/v1/scores/<int:id>')
 def route_get_score_by_id(id):
-    one = get_score_by_id(id)
+    one = Score.query.filter_by(id=id).first()
     if one is None:
         return jsonify({"error": 404, "message": "Not found"}), 404
-    return jsonify(one)
+    return jsonify(one.json())
 
 
 @app.errorhandler(404)
